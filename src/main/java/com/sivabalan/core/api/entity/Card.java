@@ -4,10 +4,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="kanbancardtable")
+@NamedQueries(
+		{
+			@NamedQuery(name = "retrieveallcards", query = "select a from Card a"),
+			@NamedQuery(name = "getcardbyid", query = "select a from Card a where a.id=:id")
+			
+		}
+		)
 public class Card {
 	
 	@Id
@@ -20,7 +29,7 @@ public class Card {
 		return id;
 	}
 
-	public String getTitle() {
+	public String getTitle () {
 		return title;
 	}
 	public void setTitle(String title) {

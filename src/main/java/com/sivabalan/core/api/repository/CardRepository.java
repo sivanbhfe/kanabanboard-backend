@@ -1,5 +1,7 @@
 package com.sivabalan.core.api.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -17,10 +19,43 @@ public class CardRepository {
 	private EntityManager entityManager;
 	
 	@Transactional
-	public void addCard(Card card) {	
+	public List<Card> addCard(Card card) {	
 		entityManager.persist(card);
-				
+		return this.entityManager.createNamedQuery("retrieveallcards").getResultList();
+	}
+
+	@Transactional
+	public List<Card> toProgress(String cardid) {
+		// TODO Auto-generated method stub
+		int id = Integer.parseInt(cardid);
+		Card temp = (Card) this.entityManager.createNamedQuery("getcardbyid").setParameter("id", id).getSingleResult();
+		temp.setStatus("inprogress");
+		this.entityManager.merge(temp);
+		return this.entityManager.createNamedQuery("retrieveallcards").getResultList();
 	}
 	
+	@Transactional
+	public List<Card> toDone(String cardid) {
+		// TODO Auto-generated method stub
+		int id = Integer.parseInt(cardid);
+		Card temp = (Card) this.entityManager.createNamedQuery("getcardbyid").setParameter("id", id).getSingleResult();
+		temp.setStatus("done");
+		this.entityManager.merge(temp);
+		return this.entityManager.createNamedQuery("retrieveallcards").getResultList();
+	}
+	
+	@Transactional
+	public List<Card> toDo(String cardid) {
+		// TODO Auto-generated method stub
+		int id = Integer.parseInt(cardid);
+		Card temp = (Card) this.entityManager.createNamedQuery("getcardbyid").setParameter("id", id).getSingleResult();
+		temp.setStatus("todo");
+		this.entityManager.merge(temp);
+		return this.entityManager.createNamedQuery("retrieveallcards").getResultList();
+	}
 
+	public List<Card> listAll() {
+		// TODO Auto-generated method stub
+		return this.entityManager.createNamedQuery("retrieveallcards").getResultList();
+	}
 }
