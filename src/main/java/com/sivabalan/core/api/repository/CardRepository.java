@@ -58,4 +58,16 @@ public class CardRepository {
 		// TODO Auto-generated method stub
 		return this.entityManager.createNamedQuery("retrieveallcards").getResultList();
 	}
+
+	@Transactional
+	public List<Card> updateTitle(String cardid, String title) {
+		// TODO Auto-generated method stub
+		int id = Integer.parseInt(cardid);
+		Card temp = (Card) this.entityManager.createNamedQuery("getcardbyid").setParameter("id", id).getSingleResult();
+		temp.setTitle(title);
+		System.out.println(title);
+		System.out.println(cardid);
+		this.entityManager.merge(temp);
+		return this.entityManager.createNamedQuery("retrieveallcards").getResultList();
+	}
 }

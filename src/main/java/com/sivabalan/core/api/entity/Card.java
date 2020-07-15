@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name="kanbancardtable")
 @NamedQueries(
 		{
-			@NamedQuery(name = "retrieveallcards", query = "select a from Card a"),
+			@NamedQuery(name = "retrieveallcards", query = "select a from Card a order by a.id ASC"),
 			@NamedQuery(name = "getcardbyid", query = "select a from Card a where a.id=:id")
 			
 		}

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sivabalan.core.api.entity.Card;
 import com.sivabalan.core.api.model.AddCardRequest;
+import com.sivabalan.core.api.model.UpdateTitle;
 import com.sivabalan.core.api.service.CardService;
 
 @RestController
@@ -47,6 +48,13 @@ public class CardController {
 			produces = {MediaType.APPLICATION_JSON_VALUE})
 	public List<Card> toDo(@PathVariable String id) {
 		return cardService.toDo(id);
+	}
+	@CrossOrigin
+	@PostMapping(value="updatetitle", consumes= {MediaType.APPLICATION_JSON_VALUE},
+			produces = {MediaType.APPLICATION_JSON_VALUE})
+	public List<Card> updateTitle(@RequestBody UpdateTitle updateTitle) {
+		System.out.println(updateTitle.getTitle());
+		return cardService.updateTitle(updateTitle.getId(),updateTitle.getTitle());
 	}
 	@CrossOrigin
 	@GetMapping(value="listall", consumes= {MediaType.APPLICATION_JSON_VALUE},
