@@ -14,7 +14,6 @@ import javax.persistence.Table;
 		{
 			@NamedQuery(name = "retrieveallcards", query = "select a from Card a order by a.id ASC"),
 			@NamedQuery(name = "getcardbyid", query = "select a from Card a where a.id=:id")
-			
 		}
 		)
 public class Card {

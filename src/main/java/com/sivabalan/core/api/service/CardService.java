@@ -46,4 +46,9 @@ public class CardService {
 		// TODO Auto-generated method stub
 		return cardRepository.updateTitle(id, title);
 	}
+
+	public List<Card> deleteCard(String id) {
+		// TODO Auto-generated method stub
+		return cardRepository.deleteCard(id);
+	}
 }

@@ -70,4 +70,13 @@ public class CardRepository {
 		this.entityManager.merge(temp);
 		return this.entityManager.createNamedQuery("retrieveallcards").getResultList();
 	}
+
+	@Transactional
+	public List<Card> deleteCard(String cardid) {
+		// TODO Auto-generated method stub
+		int id = Integer.parseInt(cardid);
+		Card temp = (Card) this.entityManager.createNamedQuery("getcardbyid").setParameter("id", id).getSingleResult();
+		this.entityManager.remove(temp);
+		return this.entityManager.createNamedQuery("retrieveallcards").getResultList();	
+	}
 }
